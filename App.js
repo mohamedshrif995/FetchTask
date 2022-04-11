@@ -6,9 +6,9 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import type { Node } from 'react';
+import React, { useEffect } from 'react';
 import {
+  FlatList,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -25,44 +25,40 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
-const Section = ({ children, title }): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const App: () => Node = () => {
+import { useSelector, useDispatch, connect } from 'react-redux';
+import { getData } from './app/reduxModal/actions'
+import { GET_DATA } from './app/reduxModal/actions'
+import UserCard from './app/components/UserCard';
+const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+  const { data } = useSelector(state => state.reducer)
+  const dispatch = useDispatch()
+  // const API_URL = 'https://jsonplaceholder.typicode.com/posts'
 
+  useEffect(() => {
+    // getData()
+    dispatch(getData())
+  }, [])
+  console.log(`datadata`, data)
+  const renderItem = ({ item }) => {
+    return (
+      <View style={styles.cardContainer}>
+        <UserCard data={item} />
+      </View>
+    )
+  }
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Text>sdfsdfd</Text>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </SafeAreaView>
   );
 };
@@ -86,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default App
