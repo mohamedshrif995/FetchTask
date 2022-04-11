@@ -1,25 +1,31 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
-const UserCard = ({ data, onPress }) => {
+const UserDetails = ({ item }) => {
     return (
-        <TouchableOpacity style={styles.container} onPress={() => onPress()}>
+        <View style={styles.container}>
             <View style={styles.infoContainer}>
                 <Text>Name :</Text>
-                <Text style={styles.name}>{data.name}</Text>
+                <Text style={styles.name}>{item.name}</Text>
+            </View>
+            <View style={styles.infoContainer}>
+                <Text>Username :</Text>
+                <Text style={styles.name}>{item.username}</Text>
+            </View>
+            <View style={styles.infoContainer}>
+                <Text>Phone :</Text>
+                <Text style={styles.name}>{item.phone}</Text>
             </View>
             <View style={styles.infoContainer}>
                 <Text>Email :</Text>
-                <Text style={styles.email}>{data.email}</Text>
+                <Text style={styles.email}>{item.email}</Text>
             </View>
-        </TouchableOpacity>
+        </View>
     )
 }
-export default UserCard
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: 'white',
         marginHorizontal: 16,
         borderColor: '#cccccc',
@@ -42,6 +48,7 @@ const styles = StyleSheet.create({
 
     },
     email: {
+        // marginTop: 8,
         fontSize: 18,
         fontWeight: '400',
         textAlign: 'left'
@@ -49,3 +56,7 @@ const styles = StyleSheet.create({
     },
 
 });
+
+
+export default UserDetails
+

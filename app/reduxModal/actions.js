@@ -7,7 +7,6 @@ export const getData = () => {
             const result = fetch(API_URL).then((res) => {
                 const final = res.json()
                 final.then((data) => {
-                    console.log(`movmov`, data)
                     if (data && data) {
                         dispatch({
                             type: GET_DATA,
