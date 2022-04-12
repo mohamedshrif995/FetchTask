@@ -29,6 +29,7 @@ import { useSelector, useDispatch, connect } from 'react-redux';
 import { getData } from '../reduxModal/actions'
 import { GET_DATA } from '../reduxModal/actions'
 import UserCard from '../components/UserCard';
+import styles from './Styles'
 
 const HomeScreen = ({ navigation }) => {
     const isDarkMode = useColorScheme() === 'dark';
@@ -63,23 +64,6 @@ const HomeScreen = ({ navigation }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    sectionContainer: {
-        marginTop: 32,
-        paddingHorizontal: 24,
-    },
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: '600',
-    },
-    sectionDescription: {
-        marginTop: 8,
-        fontSize: 18,
-        fontWeight: '400',
-    },
-    highlight: {
-        fontWeight: '700',
-    },
-});
+
 
 export default HomeScreen
